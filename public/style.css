@@ -88,7 +88,7 @@ body { font-family: var(--font-primary); background: var(--bg-primary); color: v
 .pmc-stats { display: flex; gap: 20px; margin-top: 10px; }
 .stat-item { display: flex; flex-direction: column; }
 .stat-value { font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--text-primary); display: flex; align-items: center;}
-.stat-value.votes { color: var(--accent-gold-light); }
+.stat-value.votes { color: var(--accent-gold-light); display: flex; align-items: baseline; }
 .stat-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
 
 .gap-indicators { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
@@ -132,6 +132,11 @@ body { font-family: var(--font-primary); background: var(--bg-primary); color: v
 .trend-none { color: var(--text-muted); font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; }
 .pmc-trend { margin-left: 8px; padding: 2px 6px; background: rgba(255,255,255,0.05); border-radius: 4px; font-size: 0.8rem; vertical-align: middle; }
 .top5-trend { width: 36px; text-align: right; flex-shrink: 0; display: flex; justify-content: flex-end; align-items: center; margin-right: 8px; }
+
+/* Trạng thái Tăng/Giảm số vote */
+.vote-trend-up { color: var(--accent-green); font-size: 0.7rem; font-weight: 600; margin-left: 6px; }
+.vote-trend-down { color: var(--accent-red); font-size: 0.7rem; font-weight: 600; margin-left: 6px; }
+.vote-trend-none { color: var(--text-muted); font-size: 0.7rem; font-weight: 500; margin-left: 6px; }
 
 @media (max-width: 768px) {
   .container { padding: 0 16px; }
