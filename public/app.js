@@ -53,7 +53,7 @@ function renderData(data) {
     return;
   }
 
-  const categoryIcons = { "sea-female": "🌏", "female-artiste": "🎤", "song-of-year": "🎵" };
+  const categoryIcons = { "sea-female": "🌏", "female-artiste": "🎤", "song-of-year": "🎵", "album-of-year": "💿" };
 
   const html = data.categories.map((cat) => {
     if (cat.error) {
