@@ -29,6 +29,12 @@ const CATEGORIES = [
     targetName: "Phương Mỹ Chi",
     targetSong: "ẾCH NGOÀI ĐÁY GIẾNG",
   },
+  {
+    id: "album-of-year",
+    name: "Album of the Year",
+    slug: "ca-si-nam-hay-nhat",
+    targetName: "DTAP",
+  },
 ];
 
 const BASE_URL = "https://jupitermusicawards.com/nominees/?category=";
