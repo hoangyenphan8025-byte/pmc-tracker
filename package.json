@@ -1,0 +1,14 @@
+{
+  "name": "pmc-tracker",
+  "version": "1.0.0",
+  "description": "Phương Mỹ Chi - Jupiter Music Awards Vote Tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "node-html-parser": "^6.1.13"
+  }
+}
