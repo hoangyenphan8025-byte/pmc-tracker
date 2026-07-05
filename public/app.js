@@ -65,6 +65,26 @@ function getTrendHtml(currentRank, name, categoryId) {
   }
 }
 
+function getVoteTrendHtml(currentVotes, name, categoryId) {
+  if (!previousData) return '<span class="vote-trend-none" title="Đang chờ dữ liệu cũ">(+0)</span>';
+  const prevCat = previousData.categories.find(c => c.categoryId === categoryId);
+  if (!prevCat || !prevCat.allNominees) return '<span class="vote-trend-none">(+0)</span>';
+
+  const prevNominee = prevCat.allNominees.find(n => n.name === name);
+  if (!prevNominee) return '<span class="vote-trend-none">(+0)</span>';
+
+  const prevVotes = prevNominee.count;
+  const diff = currentVotes - prevVotes;
+
+  if (diff > 0) {
+    return `<span class="vote-trend-up" title="Tăng ${diff} votes trong 1 phút qua">(+${diff.toLocaleString("vi-VN")})</span>`;
+  } else if (diff < 0) {
+    return `<span class="vote-trend-down" title="Bị trừ ${Math.abs(diff)} votes trong 1 phút qua">(${diff.toLocaleString("vi-VN")})</span>`;
+  } else {
+    return `<span class="vote-trend-none" title="Không có vote mới trong 1 phút qua">(+0)</span>`;
+  }
+}
+
 function renderData(data) {
   if (!data.categories || data.categories.length === 0) {
     cardsGrid.innerHTML = '<div class="error-card"><p>Không có dữ liệu</p></div>';
@@ -102,10 +122,11 @@ function renderData(data) {
       const barWidth = maxVotes > 0 ? (item.count / maxVotes) * 100 : 0;
       const songDisplay = item.song ? `<div class="top5-song-name">${item.song}</div>` : "";
       
-      // Calculate trend
-      const trendHtml = getTrendHtml(rank, item.name, cat.categoryId);
+      // Calculate trends
+      const rankTrendHtml = getTrendHtml(rank, item.name, cat.categoryId);
+      const voteTrendHtml = getVoteTrendHtml(item.count, item.name, cat.categoryId);
 
-      return `<div class="top5-item ${isTarget ? "is-pmc" : ""}"><div class="top5-rank ${rankClass}">${rank}</div><img class="top5-avatar" src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'" /><div class="top5-info"><div class="top5-name">${item.name}</div>${songDisplay}</div><div class="top5-trend">${trendHtml}</div><div><span class="top5-votes">${item.count.toLocaleString("vi-VN")}</span><span class="top5-votes-label">votes</span></div><div class="vote-bar-wrap"><div class="vote-bar" style="width:${barWidth}%"></div></div></div>`;
+      return `<div class="top5-item ${isTarget ? "is-pmc" : ""}"><div class="top5-rank ${rankClass}">${rank}</div><img class="top5-avatar" src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'" /><div class="top5-info"><div class="top5-name">${item.name}</div>${songDisplay}</div><div class="top5-trend">${rankTrendHtml}</div><div><span class="top5-votes">${item.count.toLocaleString("vi-VN")}</span>${voteTrendHtml}<span class="top5-votes-label">votes</span></div><div class="vote-bar-wrap"><div class="vote-bar" style="width:${barWidth}%"></div></div></div>`;
     }).join("");
 
     let gapHtml = "";
@@ -116,9 +137,10 @@ function renderData(data) {
       gapHtml += `<div class="gap-item gap-below"><span class="gap-arrow">▼</span> Hơn ${truncateName(cat.belowName)}: <strong>${cat.gapToBelow.toLocaleString("vi-VN")}</strong> votes</div>`;
     }
 
-    const pmcTrend = getTrendHtml(target.rank, target.name, cat.categoryId);
+    const pmcRankTrend = getTrendHtml(target.rank, target.name, cat.categoryId);
+    const pmcVoteTrend = getVoteTrendHtml(target.count, target.name, cat.categoryId);
 
-    return `<div class="category-card"><div class="card-header"><div><div class="card-category">${categoryIcons[cat.categoryId] || "🏆"} HẠNG MỤC</div><div class="card-category-name">${cat.categoryName}</div></div><div class="card-badge badge-rank">🏅 Hạng ${target.rank}/${cat.totalNominees}</div></div><div class="pmc-spotlight"><img class="pmc-avatar" src="${target.image}" alt="${target.name}" onerror="this.style.display='none'" /><div class="pmc-info"><div class="pmc-name">${target.name}</div>${target.song ? `<div class="pmc-song">🎶 ${target.song}</div>` : ""}<div class="pmc-stats"><div class="stat-item"><span class="stat-value votes">${target.count.toLocaleString("vi-VN")}</span><span class="stat-label">Tổng votes</span></div><div class="stat-item"><span class="stat-value">#${target.rank} <span class="pmc-trend">${pmcTrend}</span></span><span class="stat-label">Thứ hạng</span></div><div class="stat-item"><span class="stat-value">${cat.totalNominees}</span><span class="stat-label">Tổng ứng viên</span></div></div></div>${gapHtml ? `<div class="gap-indicators">${gapHtml}</div>` : ""}</div><div class="top5-section"><div class="top5-title">Bảng xếp hạng Top ${Math.min(5, cat.top5.length)}${!targetInTop5 ? ` & ${target.name}` : ""}</div><div class="top5-list">${listHtml}</div></div></div>`;
+    return `<div class="category-card"><div class="card-header"><div><div class="card-category">${categoryIcons[cat.categoryId] || "🏆"} HẠNG MỤC</div><div class="card-category-name">${cat.categoryName}</div></div><div class="card-badge badge-rank">🏅 Hạng ${target.rank}/${cat.totalNominees}</div></div><div class="pmc-spotlight"><img class="pmc-avatar" src="${target.image}" alt="${target.name}" onerror="this.style.display='none'" /><div class="pmc-info"><div class="pmc-name">${target.name}</div>${target.song ? `<div class="pmc-song">🎶 ${target.song}</div>` : ""}<div class="pmc-stats"><div class="stat-item"><span class="stat-value votes">${target.count.toLocaleString("vi-VN")} ${pmcVoteTrend}</span><span class="stat-label">Tổng votes</span></div><div class="stat-item"><span class="stat-value">#${target.rank} <span class="pmc-trend">${pmcRankTrend}</span></span><span class="stat-label">Thứ hạng</span></div><div class="stat-item"><span class="stat-value">${cat.totalNominees}</span><span class="stat-label">Tổng ứng viên</span></div></div></div>${gapHtml ? `<div class="gap-indicators">${gapHtml}</div>` : ""}</div><div class="top5-section"><div class="top5-title">Bảng xếp hạng Top ${Math.min(5, cat.top5.length)}${!targetInTop5 ? ` & ${target.name}` : ""}</div><div class="top5-list">${listHtml}</div></div></div>`;
   }).join("");
 
   cardsGrid.innerHTML = html;
@@ -130,7 +152,7 @@ function renderData(data) {
 
 function truncateName(name) {
   if (!name) return "...";
-  return name.length > 15 ? name.substring(0, 15) + "…" : name;
+  return name.length > 15 ? name.substring(0, 15) + "গামী" : name;
 }
 
 function updateCountdown() {
