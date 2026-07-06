@@ -1,0 +1,27 @@
+name: 22:00 Daily Snapshot
+on:
+  schedule:
+    - cron: '0 15 * * *' # 15:00 UTC = 22:00 Giờ Việt Nam
+  workflow_dispatch:
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm install
+      - name: Run Snapshot Script
+        run: node scripts/snapshot.js
+      - name: Commit and Push changes
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add public/history.json
+          git commit -m "Auto-update 22:00 daily snapshot" || exit 0
+          git push
