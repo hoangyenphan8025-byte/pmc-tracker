@@ -144,7 +144,7 @@ function renderHistory() {
   ];
 
   const html = cats.map(catDef => {
-    let listHtml = "";
+    let scrollerHtml = "";
     const sorted = [...historyData].sort((a,b) => b.timestamp - a.timestamp); // Xếp ngày mới nhất lên đầu
     
     sorted.forEach((dayObj, idx) => {
@@ -194,11 +194,12 @@ function renderHistory() {
            rowsHtml = `<div class="history-item-row is-target"><div class="hist-rank">#${target.rank}</div><div class="hist-name">${target.name}</div><div class="hist-votes">${target.count.toLocaleString("vi-VN")}</div></div>`;
        }
 
-       listHtml += `<div class="history-day-block"><div class="history-day-header">📅 ${dayObj.date}</div>${rowsHtml}</div>`;
+       // Dùng class history-day-card thay vì block
+       scrollerHtml += `<div class="history-day-card"><div class="history-day-header">📅 ${dayObj.date}</div>${rowsHtml}</div>`;
     });
 
-    if (!listHtml) return "";
-    return `<div class="category-card"><div class="card-header"><div><div class="card-category">${catDef.icon} LỊCH SỬ CHỐT VOTE 22H</div><div class="card-category-name">${catDef.name}</div></div></div><div class="history-list">${listHtml}</div></div>`;
+    if (!scrollerHtml) return "";
+    return `<div class="category-card"><div class="card-header"><div><div class="card-category">${catDef.icon} LỊCH SỬ CHỐT VOTE 22H</div><div class="card-category-name">${catDef.name}</div></div></div><div class="history-scroller">${scrollerHtml}</div></div>`;
   }).join("");
 
   historyCardsGrid.innerHTML = html;
