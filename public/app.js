@@ -151,18 +151,50 @@ function renderHistory() {
        const catData = dayObj.categories.find(c => c.categoryId === catDef.id);
        if (!catData || !catData.target) return;
        const target = catData.target;
+       const top5 = catData.top5 || []; // Fallback nếu dữ liệu cũ chưa có top5
        
-       let diffHtml = '<span class="vote-trend-none">(+0)</span>';
-       if (idx < sorted.length - 1) { // So sánh với ngày hôm trước
-          const prevDayObj = sorted[idx + 1];
-          const prevCat = prevDayObj.categories.find(c => c.categoryId === catDef.id);
-          if (prevCat && prevCat.target) {
-             const diff = target.count - prevCat.target.count;
-             if (diff > 0) diffHtml = `<span class="vote-trend-up">(+${diff.toLocaleString("vi-VN")})</span>`;
-             else if (diff < 0) diffHtml = `<span class="vote-trend-down">(${diff.toLocaleString("vi-VN")})</span>`;
-          }
+       let displayList = [...top5];
+       const targetInTop5 = displayList.some(n => n.name === target.name);
+       if (!targetInTop5 && target) {
+         displayList.push({ separator: true });
+         displayList.push({ ...target, isTarget: true });
        }
-       listHtml += `<div class="history-day-row"><div class="history-date">${dayObj.date}</div><div class="history-rank">Hạng ${target.rank}</div><div class="history-votes">${target.count.toLocaleString("vi-VN")} ${diffHtml}</div></div>`;
+
+       let rowsHtml = displayList.map(item => {
+           if (item.separator) return `<div style="text-align:center;color:var(--text-muted);font-size:0.7rem;margin:4px 0;">• • •</div>`;
+           
+           const isTarget = item.isTarget || item.name === target.name;
+           let diffHtml = '<span class="vote-trend-none">(+0)</span>';
+           
+           if (idx < sorted.length - 1) { // So sánh với ngày hôm trước
+              const prevDayObj = sorted[idx + 1];
+              const prevCat = prevDayObj.categories.find(c => c.categoryId === catDef.id);
+              if (prevCat) {
+                 const prevItem = (prevCat.top5 || []).find(n => n.name === item.name) || (prevCat.target && prevCat.target.name === item.name ? prevCat.target : null);
+                 if (prevItem) {
+                    const diff = item.count - prevItem.count;
+                    if (diff > 0) diffHtml = `<span class="vote-trend-up">(+${diff.toLocaleString("vi-VN")})</span>`;
+                    else if (diff < 0) diffHtml = `<span class="vote-trend-down">(${diff.toLocaleString("vi-VN")})</span>`;
+                 }
+              }
+           }
+           
+           const rClass = item.rank === 1 ? 'r1' : item.rank === 2 ? 'r2' : item.rank === 3 ? 'r3' : '';
+           return `
+             <div class="history-item-row ${isTarget ? 'is-target' : ''}">
+               <div class="hist-rank ${rClass}">#${item.rank}</div>
+               <div class="hist-name">${item.name}</div>
+               <div class="hist-votes">${item.count.toLocaleString("vi-VN")} ${diffHtml}</div>
+             </div>
+           `;
+       }).join("");
+
+       if (!rowsHtml && target) {
+           // Fallback cho ngày hôm qua (chưa lưu top5)
+           rowsHtml = `<div class="history-item-row is-target"><div class="hist-rank">#${target.rank}</div><div class="hist-name">${target.name}</div><div class="hist-votes">${target.count.toLocaleString("vi-VN")}</div></div>`;
+       }
+
+       listHtml += `<div class="history-day-block"><div class="history-day-header">📅 ${dayObj.date}</div>${rowsHtml}</div>`;
     });
 
     if (!listHtml) return "";
