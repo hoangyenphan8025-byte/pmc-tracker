@@ -28,7 +28,9 @@ async function run() {
     const targetIndex = nominees.findIndex((n) => n.name.toUpperCase().includes(category.targetName.toUpperCase()));
     if (targetIndex >= 0) target = { ...nominees[targetIndex], rank: targetIndex + 1 };
     
-    return { categoryId: category.id, target };
+    const top5 = nominees.slice(0, 5); // Đã thêm lấy Top 5
+    
+    return { categoryId: category.id, target, top5 };
   }));
   
   const historyPath = path.join(__dirname, "../public/history.json");
@@ -47,7 +49,7 @@ async function run() {
   else history.push(snapshot);
   
   fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
-  console.log("Successfully saved snapshot for", dateStr);
+  console.log("Successfully saved snapshot (with Top 5) for", dateStr);
 }
 
 run();
