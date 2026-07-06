@@ -1,1 +1,40 @@
-[]
+[
+  {
+    "date": "06/07/2026",
+    "timestamp": 1783344797165,
+    "categories": [
+      {
+        "categoryId": "sea-female",
+        "target": {
+          "rank": 3,
+          "name": "PHƯƠNG MỸ CHI",
+          "count": 1603
+        }
+      },
+      {
+        "categoryId": "female-artiste",
+        "target": {
+          "rank": 2,
+          "name": "PHƯƠNG MỸ CHI",
+          "count": 2109
+        }
+      },
+      {
+        "categoryId": "song-of-year",
+        "target": {
+          "rank": 12,
+          "name": "Phương Mỹ Chi",
+          "count": 1233
+        }
+      },
+      {
+        "categoryId": "album-of-year",
+        "target": {
+          "rank": 14,
+          "name": "DTAP",
+          "count": 547
+        }
+      }
+    ]
+  }
+]
