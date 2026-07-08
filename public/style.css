@@ -189,3 +189,23 @@ body { font-family: var(--font-primary); background: var(--bg-primary); color: v
   .history-scroller { padding: 16px 20px; }
   .history-day-card { flex: 0 0 250px; }
 }
+/* Bé Chibi chạy lăng xăng */
+.chibi-runner {
+  position: fixed;
+  bottom: 8%;           /* Cách đáy màn hình một chút */
+  left: -150px;         /* Xuất phát từ ngoài rìa bên trái */
+  width: 110px;         /* Kích thước bé chibi */
+  height: auto;
+  z-index: 9999;        /* Luôn nổi lên trên cùng */
+  pointer-events: none; /* Không cản trở khi bạn bấm các nút trên web */
+  animation: runBackAndForth 15s linear infinite; /* Chạy một vòng mất 15 giây */
+  filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.6)); /* Hào quang lấp lánh màu vàng */
+}
+
+@keyframes runBackAndForth {
+  0% { transform: translateX(0) scaleX(1); } /* Đứng bên trái, mặt hướng sang phải */
+  45% { transform: translateX(calc(100vw + 300px)) scaleX(1); } /* Chạy sang tận cùng bên phải */
+  50% { transform: translateX(calc(100vw + 300px)) scaleX(-1); } /* Quay đầu lại */
+  95% { transform: translateX(0) scaleX(-1); } /* Chạy về lại bên trái */
+  100% { transform: translateX(0) scaleX(1); } /* Quay đầu trở lại vị trí ban đầu */
+}
