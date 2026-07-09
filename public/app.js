@@ -61,15 +61,15 @@ function getTrendHtml(currentRank, name, categoryId) {
 }
 
 function getVoteTrendHtml(currentVotes, name, categoryId) {
-  if (!previousData) return '<span class="vote-trend-none">(+0)</span>';
+  if (!previousData) return '';
   const prevCat = previousData.categories.find(c => c.categoryId === categoryId);
-  if (!prevCat || !prevCat.allNominees) return '<span class="vote-trend-none">(+0)</span>';
+  if (!prevCat || !prevCat.allNominees) return '';
   const prevNominee = prevCat.allNominees.find(n => n.name === name);
-  if (!prevNominee) return '<span class="vote-trend-none">(+0)</span>';
+  if (!prevNominee) return '';
   const diff = currentVotes - prevNominee.count;
   if (diff > 0) return `<span class="vote-trend-up">(+${diff.toLocaleString("vi-VN")})</span>`;
   else if (diff < 0) return `<span class="vote-trend-down">(${diff.toLocaleString("vi-VN")})</span>`;
-  else return `<span class="vote-trend-none">(+0)</span>`;
+  else return '';
 }
 
 function renderData(data) {
@@ -164,7 +164,7 @@ function renderHistory() {
            if (item.separator) return `<div style="text-align:center;color:var(--text-muted);font-size:0.7rem;margin:4px 0;">• • •</div>`;
            
            const isTarget = item.isTarget || item.name === target.name;
-           let diffHtml = '<span class="vote-trend-none">(+0)</span>';
+           let diffHtml = '';
            
            if (idx < sorted.length - 1) { // So sánh với ngày hôm trước
               const prevDayObj = sorted[idx + 1];
