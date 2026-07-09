@@ -28,7 +28,7 @@ async function run() {
     const targetIndex = nominees.findIndex((n) => n.name.toUpperCase().includes(category.targetName.toUpperCase()));
     if (targetIndex >= 0) target = { ...nominees[targetIndex], rank: targetIndex + 1 };
     
-    const top5 = nominees.slice(0, 5); // Đã thêm lấy Top 5
+    const top5 = nominees.slice(0, 5); // Lấy Top 5
     
     return { categoryId: category.id, target, top5 };
   }));
@@ -39,8 +39,14 @@ async function run() {
     try { history = JSON.parse(fs.readFileSync(historyPath, "utf8")); } catch(e){}
   }
   
-  const vnTime = new Date(new Date().getTime() + 7 * 60 * 60 * 1000);
-  const dateStr = vnTime.getDate().toString().padStart(2, '0') + '/' + (vnTime.getMonth()+1).toString().padStart(2, '0') + '/' + vnTime.getFullYear();
+  // Hàm lấy chuẩn ngày tháng năm theo múi giờ Việt Nam
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Ho_Chi_Minh',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+  const dateStr = formatter.format(new Date()); 
   
   const snapshot = { date: dateStr, timestamp: Date.now(), categories: results };
   
