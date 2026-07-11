@@ -1,4 +1,4 @@
-const REFRESH_INTERVAL = 60;
+const REFRESH_INTERVAL = 30;
 const API_URL = "/api/data";
 const API_REFRESH_URL = "/api/refresh";
 
