@@ -39,14 +39,13 @@ async function run() {
     try { history = JSON.parse(fs.readFileSync(historyPath, "utf8")); } catch(e){}
   }
   
-  // Hàm lấy chuẩn ngày tháng năm theo múi giờ Việt Nam
-  const formatter = new Intl.DateTimeFormat('en-GB', {
-    timeZone: 'Asia/Ho_Chi_Minh',
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  });
-  const dateStr = formatter.format(new Date()); 
+  // THỦ THUẬT: Lùi lại 12 tiếng để "Ngày chốt vote" không bao giờ bị nhảy sai.
+  // Dù GitHub có chạy trễ vào rạng sáng hoặc sáng hôm sau, ngày chốt vẫn tính cho hôm trước.
+  const now = Date.now();
+  const vnTime = new Date(now + 7 * 60 * 60 * 1000);
+  const logicalVoteTime = new Date(vnTime.getTime() - 12 * 60 * 60 * 1000);
+  
+  const dateStr = `${String(logicalVoteTime.getUTCDate()).padStart(2, '0')}/${String(logicalVoteTime.getUTCMonth() + 1).padStart(2, '0')}/${logicalVoteTime.getUTCFullYear()}`;
   
   const snapshot = { date: dateStr, timestamp: Date.now(), categories: results };
   
