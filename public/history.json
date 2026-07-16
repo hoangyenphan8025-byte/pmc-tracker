@@ -1458,5 +1458,151 @@
         ]
       }
     ]
+  },
+  {
+    "date": "16/07/2026",
+    "timestamp": 1784227666412,
+    "categories": [
+      {
+        "categoryId": "sea-female",
+        "target": {
+          "rank": 3,
+          "name": "PHƯƠNG MỸ CHI",
+          "count": 5345
+        },
+        "top5": [
+          {
+            "rank": 1,
+            "name": "Lisa",
+            "count": 9019
+          },
+          {
+            "rank": 2,
+            "name": "BINI",
+            "count": 8681
+          },
+          {
+            "rank": 3,
+            "name": "PHƯƠNG MỸ CHI",
+            "count": 5345
+          },
+          {
+            "rank": 4,
+            "name": "Becky Rebecca",
+            "count": 3474
+          },
+          {
+            "rank": 5,
+            "name": "Angela Ken",
+            "count": 1838
+          }
+        ]
+      },
+      {
+        "categoryId": "female-artiste",
+        "target": {
+          "rank": 2,
+          "name": "PHƯƠNG MỸ CHI",
+          "count": 7943
+        },
+        "top5": [
+          {
+            "rank": 1,
+            "name": "ROSÉ",
+            "count": 10494
+          },
+          {
+            "rank": 2,
+            "name": "PHƯƠNG MỸ CHI",
+            "count": 7943
+          },
+          {
+            "rank": 3,
+            "name": "JENNIE",
+            "count": 4374
+          },
+          {
+            "rank": 4,
+            "name": "WINTER",
+            "count": 3462
+          },
+          {
+            "rank": 5,
+            "name": "Lesti",
+            "count": 2921
+          }
+        ]
+      },
+      {
+        "categoryId": "song-of-year",
+        "target": {
+          "rank": 11,
+          "name": "Phương Mỹ Chi",
+          "count": 3969
+        },
+        "top5": [
+          {
+            "rank": 1,
+            "name": "CORTIS",
+            "count": 38676
+          },
+          {
+            "rank": 2,
+            "name": "BTS",
+            "count": 25204
+          },
+          {
+            "rank": 3,
+            "name": "TREASURE",
+            "count": 21968
+          },
+          {
+            "rank": 4,
+            "name": "BABYMONSTER",
+            "count": 13216
+          },
+          {
+            "rank": 5,
+            "name": "PLAVE",
+            "count": 10640
+          }
+        ]
+      },
+      {
+        "categoryId": "album-of-year",
+        "target": {
+          "rank": 14,
+          "name": "DTAP",
+          "count": 1566
+        },
+        "top5": [
+          {
+            "rank": 1,
+            "name": "CORTIS",
+            "count": 34170
+          },
+          {
+            "rank": 2,
+            "name": "BTS",
+            "count": 26343
+          },
+          {
+            "rank": 3,
+            "name": "NCT JNJM",
+            "count": 25124
+          },
+          {
+            "rank": 4,
+            "name": "BABYMONSTER",
+            "count": 13870
+          },
+          {
+            "rank": 5,
+            "name": "PLAVE",
+            "count": 9332
+          }
+        ]
+      }
+    ]
   }
 ]
