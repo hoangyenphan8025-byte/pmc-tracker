@@ -4614,5 +4614,147 @@
         ]
       }
     ]
+  },
+  {
+    "date": "08/08/2026",
+    "timestamp": 1786202580979,
+    "categories": [
+      {
+        "categoryId": "sea-female",
+        "target": {
+          "rank": 8,
+          "name": "PHƯƠNG MỸ CHI",
+          "count": 264
+        },
+        "top5": [
+          {
+            "rank": 1,
+            "name": "Becky Rebecca",
+            "count": 3672
+          },
+          {
+            "rank": 2,
+            "name": "BINI",
+            "count": 2091
+          },
+          {
+            "rank": 3,
+            "name": "Freen Sarocha",
+            "count": 649
+          },
+          {
+            "rank": 4,
+            "name": "Lingling kwong",
+            "count": 536
+          },
+          {
+            "rank": 5,
+            "name": "Regine Velasquez",
+            "count": 492
+          }
+        ]
+      },
+      {
+        "categoryId": "female-artiste",
+        "target": {
+          "rank": 2,
+          "name": "PHƯƠNG MỸ CHI",
+          "count": 732
+        },
+        "top5": [
+          {
+            "rank": 1,
+            "name": "Lesti",
+            "count": 1070
+          },
+          {
+            "rank": 2,
+            "name": "PHƯƠNG MỸ CHI",
+            "count": 732
+          },
+          {
+            "rank": 3,
+            "name": "CHAERYEONG",
+            "count": 669
+          },
+          {
+            "rank": 4,
+            "name": "JENNIE",
+            "count": 562
+          },
+          {
+            "rank": 5,
+            "name": "YUQI",
+            "count": 512
+          }
+        ]
+      },
+      {
+        "categoryId": "song-of-year",
+        "target": {
+          "rank": 19,
+          "name": "Phương Mỹ Chi",
+          "count": 150
+        },
+        "top5": [
+          {
+            "rank": 1,
+            "name": "TREASURE",
+            "count": 8920
+          },
+          {
+            "rank": 2,
+            "name": "BTS",
+            "count": 6960
+          },
+          {
+            "rank": 3,
+            "name": "NCT JNJM",
+            "count": 5357
+          },
+          {
+            "rank": 4,
+            "name": "HAECHAN (NCT)",
+            "count": 4979
+          },
+          {
+            "rank": 5,
+            "name": "EXO",
+            "count": 4059
+          }
+        ]
+      },
+      {
+        "categoryId": "album-of-year",
+        "target": null,
+        "top5": [
+          {
+            "rank": 1,
+            "name": "NCT JNJM",
+            "count": 13627
+          },
+          {
+            "rank": 2,
+            "name": "BTS",
+            "count": 7729
+          },
+          {
+            "rank": 3,
+            "name": "PLAVE",
+            "count": 2341
+          },
+          {
+            "rank": 4,
+            "name": "ZEROBASEONE",
+            "count": 1933
+          },
+          {
+            "rank": 5,
+            "name": "EXO",
+            "count": 1377
+          }
+        ]
+      }
+    ]
   }
 ]
